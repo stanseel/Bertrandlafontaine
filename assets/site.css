@@ -127,9 +127,10 @@ a:hover .still img { filter: saturate(1); }
 .discipline p { color: var(--grafiet); margin: 0; }
 .discipline .verder { margin-top: auto; }
 
-.selectie { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--tussen); }
-@media (max-width: 820px) { .selectie { grid-template-columns: 1fr; } }
-.selectie .kolom { display: grid; gap: 32px; align-content: start; }
+/* Drie kolommen die rijen delen (subgrid): beelden van dezelfde rij staan altijd op één lijn */
+.selectie { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto auto; gap: 0 var(--tussen); }
+.selectie .kolom { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 40px; align-content: start; }
+@media (max-width: 820px) { .selectie { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 56px; } .selectie .kolom { grid-row: auto; grid-template-rows: none; } }
 .selectie .kolom > .meta { border-top: 1px solid var(--inkt); padding-top: 12px; }
 
 /* ---------- Kaarten ---------- */

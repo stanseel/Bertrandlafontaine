@@ -248,21 +248,21 @@ def soort_van(meta):
 
 def filmkaart(f, r):
     duur = f.get('duur', '')
-    still = kader(f'<div class="still"><img src="{r}{f["img_s"]}" alt="" loading="lazy"></div>')
+    still = f'<div class="still"><img src="{r}{f["img_s"]}" alt="" loading="lazy"></div>'
     return (f'<a class="kaart" href="{r}film/{f["slug"]}/">{still}'
             f'<span class="meta">Film · {E(f["jaar"])}{" · " + E(duur) if len(duur) < 14 else ""}</span>'
             f'<h3><span>{E(f["titel"])}</span></h3></a>')
 
 
 def tekstkaart(t, r):
-    still = kader(f'<div class="still"><img src="{r}{t["img_s"]}" alt="" loading="lazy"></div>')
+    still = f'<div class="still"><img src="{r}{t["img_s"]}" alt="" loading="lazy"></div>'
     return (f'<a class="kaart" href="{r}tekst/{t["slug"]}/">{still}'
             f'<span class="meta">{E(soort_van(t["meta"]))} · {E(jaar_van(t["meta"]))}</span>'
             f'<h3><span>{E(t["titel"])}</span></h3></a>')
 
 
 def gesprekkaart(titel, soort, r):
-    vlak = kader(f'<div class="tekstvlak"><span class="meta">{E(soort)}</span><strong>{E(titel)}</strong></div>')
+    vlak = f'<div class="tekstvlak"><span class="meta">{E(soort)}</span><strong>{E(titel)}</strong></div>'
     return (f'<a class="kaart" href="{r}gesprek/">{vlak}'
             f'<span class="meta">Gesprek</span><h3><span>{E(titel)}</span></h3></a>')
 
