@@ -16,8 +16,9 @@
   --inkt: #171716;       /* tekst en lijnen */
   --grafiet: #6A6965;    /* secundaire tekst, metadata */
   --lijn: #C9C7C0;       /* fijne scheidingslijnen */
-  --marker: #FFE34A;     /* het ene accent: markeerstiftgeel, altijd als vlak */
-  --op-marker: #171716;  /* tekst op geel, in beide thema's */
+  --marker: #FFE34A;     /* accent 1: markeerstiftgeel, kort en scherp, altijd als vlak */
+  --hemel: #99CCFF;      /* accent 2: lichtblauw, rustige vlakken */
+  --op-marker: #171716;  /* tekst op geel of blauw, in beide thema's */
   --tally: #D2361F;      /* enkel als "live/opname"-signaal */
   --still-a: #B9B6AC;
   --still-b: #8E8B82;
@@ -51,7 +52,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
-::selection { background: var(--marker); color: var(--op-marker); }
+::selection { background: var(--hemel); color: var(--op-marker); }
 :focus-visible { outline: 2px solid var(--inkt); outline-offset: 3px; box-shadow: 0 0 0 6px var(--marker); }
 .markeer, .hoeken nav a:hover, .tekstlink:hover, .project:hover h4 span { background: var(--marker); color: var(--op-marker); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 
@@ -176,7 +177,7 @@ p { margin: 0 0 1em; max-width: 64ch; }
 
 .labels { display: flex; gap: 8px; flex-wrap: wrap; }
 .label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding: 5px 10px 4px; border: 1px solid var(--inkt); border-radius: 999px; }
-.label.actief { background: var(--inkt); color: var(--beton); }
+.label.actief { background: var(--hemel); border-color: var(--hemel); color: var(--op-marker); }
 .label.live { border-color: var(--tally); color: var(--tally); }
 .label.live::before { content: "● "; }
 
@@ -187,7 +188,8 @@ p { margin: 0 0 1em; max-width: 64ch; }
 .tekstlink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; padding: 2px 3px; margin: -2px -3px; }
 .pijl::after { content: " ↗"; font-family: var(--mono); }
 
-.citaat { margin: 0; }
+.citaat { margin: 0; background: var(--hemel); color: var(--op-marker); padding: clamp(24px, 4vw, 48px); }
+.citaat .meta { color: var(--op-marker); opacity: .7; }
 .citaat blockquote { margin: 0; font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12; letter-spacing: -.02em; text-wrap: balance; max-width: 26ch; }
 .citaat figcaption { margin-top: 18px; }
 
@@ -219,6 +221,8 @@ td code { font-family: var(--mono); font-size: 13px; }
 @media (max-width: 820px) { .toon { grid-template-columns: 1fr; } }
 .toon .vb { background: var(--kalk); padding: 20px; border: 1px solid var(--lijn); }
 .toon .vb p { margin: 8px 0 0; font-size: 16px; }
+.toon .vb.wel { background: var(--hemel); border-color: var(--hemel); color: var(--op-marker); }
+.toon .vb.wel .meta { color: var(--op-marker); }
 
 pre { background: var(--kalk); border: 1px solid var(--lijn); padding: 18px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.7; }
 
@@ -297,7 +301,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
           <ul>
             <li class="ok">Grote koppen in kleine letters, strak gezet in een Zwitserse grotesk, half zo luid</li>
             <li class="ok">Vier hoeken, maar binnen een strak raster</li>
-            <li class="ok">Eén accentkleur: markeerstiftgeel, altijd als vlak</li>
+            <li class="ok">Twee accenten, altijd als vlak: markeerstiftgeel en lichtblauw</li>
             <li class="ok">Metadata in mono, als op een filmslate</li>
             <li class="ok">Een trage ticker voor wat er nu loopt</li>
             <li class="ok">Beeld groot en breed, zoals in de cinema</li>
@@ -311,8 +315,8 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
   <section class="deel" id="kleur">
     <div class="deel-kop">
       <span class="meta">Kleur</span>
-      <h2>Beton, inkt en een streep geel</h2>
-      <p class="intro">Het palet komt uit het architectenbureau: de grijze grond van een maquette, zwarte inkt en de gele markeerstift waarmee je op een plan aanduidt wat telt. De beelden brengen de kleur, de site zelf blijft ingetogen.</p>
+      <h2>Beton, inkt, een streep geel en een stuk lucht</h2>
+      <p class="intro">Het palet komt uit het architectenbureau: de grijze grond van een maquette, zwarte inkt, de gele markeerstift waarmee je op een plan aanduidt wat telt, en het lichtblauw van de lucht boven een gebouw. De beelden brengen de kleur, de site zelf blijft ingetogen.</p>
     </div>
     <div class="inhoud">
       <div>
@@ -321,19 +325,22 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
           <div class="staal"><div class="vlak" style="background:var(--kalk)"></div><h3>Kalk</h3><p>Vlakken die iets naar voren komen, zoals een citaat of codeblok.</p></div>
           <div class="staal"><div class="vlak" style="background:var(--inkt)"></div><h3>Inkt</h3><p>Tekst, lijnen en kaders. Bijna zwart, met een warme ondertoon.</p></div>
           <div class="staal"><div class="vlak" style="background:var(--grafiet)"></div><h3>Grafiet</h3><p>Bijschriften, metadata en alles wat ondersteunt.</p></div>
-          <div class="staal"><div class="vlak" style="background:var(--marker)"></div><h3>Marker</h3><p>Het enige accent. Altijd als vlak achter donkere tekst, nooit als tekstkleur.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--marker)"></div><h3>Marker</h3><p>Het scherpe accent. Voor wat je aanwijst en wat nu speelt. Altijd klein.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--hemel)"></div><h3>Hemel</h3><p>Het rustige accent. Voor grotere vlakken zoals een citaat of een actief filter.</p></div>
           <div class="staal"><div class="vlak" style="background:var(--tally)"></div><h3>Tally</h3><p>Het rode opnamelampje. Alleen voor wat nu live is of in productie zit.</p></div>
         </div>
         <div class="verhouding" aria-label="Verhouding in gebruik">
           <div style="flex:70;background:var(--beton)"></div>
           <div style="flex:20;background:var(--inkt)"></div>
           <div style="flex:7;background:var(--grafiet)"></div>
-          <div style="flex:2.5;background:var(--marker)"></div>
+          <div style="flex:5;background:var(--hemel)"></div>
+          <div style="flex:2;background:var(--marker)"></div>
           <div style="flex:.5;background:var(--tally)"></div>
         </div>
-        <p class="meta" style="margin-top:10px">Ruwe verhouding op een pagina: vooral beton, wat inkt, zelden geel, bijna nooit rood</p>
+        <p class="meta" style="margin-top:10px">Ruwe verhouding op een pagina: vooral beton, wat inkt, af en toe blauw, zelden geel, bijna nooit rood</p>
         <p style="margin-top:28px">Er is ook een donkere versie. Daar wordt beton bijna zwart en inkt lichtgrijs, en het geel blijft gewoon hetzelfde. Op donker licht het zelfs nog beter op. Gebruik die bijvoorbeeld op een projectpagina waar de film centraal staat, zoals de lichten in een zaal die doven.</p>
         <p>Geel op een lichte grond is niet leesbaar als tekst. Gebruik het daarom zoals een markeerstift: als vlak achter donkere tekst. Denk aan de ticker, een knop of link onder de muis, een rij in een lijst of één woord in een kop. Geel valt hard op, dus spaarzaam gebruiken: één geel moment per scherm is genoeg.</p>
+        <p>Lichtblauw is de kalme tegenhanger. Het mag grotere vlakken vullen: een citaat uit zijn teksten, het filter dat aan staat, geselecteerde tekst, een blok met praktische info over een panel. Ook hier staat er altijd donkere tekst op. Geel betekent "kijk hier", blauw betekent "hier mag je even blijven". Zet ze niet tegen elkaar aan, laat er altijd beton tussen.</p>
 
         <details class="richtwaarde">
           <summary>Richtwaarden kleur</summary>
@@ -347,7 +354,8 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
                 <tr><td>Grafiet</td><td><span class="swatch-mini" style="background:#6A6965"></span><code>#6A6965</code></td><td><span class="swatch-mini" style="background:#9B998F"></span><code>#9B998F</code></td><td>Metadata</td></tr>
                 <tr><td>Lijn</td><td><span class="swatch-mini" style="background:#C9C7C0"></span><code>#C9C7C0</code></td><td><span class="swatch-mini" style="background:#34332F"></span><code>#34332F</code></td><td>Fijne scheiding</td></tr>
                 <tr><td>Marker</td><td><span class="swatch-mini" style="background:#FFE34A"></span><code>#FFE34A</code></td><td><span class="swatch-mini" style="background:#FFE34A"></span><code>#FFE34A</code></td><td>Accent, enkel als vlak</td></tr>
-                <tr><td>Tekst op marker</td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td>Altijd donker</td></tr>
+                <tr><td>Hemel</td><td><span class="swatch-mini" style="background:#99CCFF"></span><code>#99CCFF</code></td><td><span class="swatch-mini" style="background:#99CCFF"></span><code>#99CCFF</code></td><td>Rustig vlak, citaat, actief filter</td></tr>
+                <tr><td>Tekst op geel en blauw</td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td>Altijd donker</td></tr>
                 <tr><td>Tally</td><td><span class="swatch-mini" style="background:#D2361F"></span><code>#D2361F</code></td><td><span class="swatch-mini" style="background:#F0543B"></span><code>#F0543B</code></td><td>Live, in productie</td></tr>
               </tbody>
             </table>
@@ -443,7 +451,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
     <div class="deel-kop">
       <span class="meta">Onderdelen · voorbeeldinhoud</span>
       <h2>Bouwstenen voor elke pagina</h2>
-      <p class="intro">Een handvol onderdelen dekt de vier activiteiten. Ze delen dezelfde lijnen, dezelfde mono en dezelfde gele markering bij aanwijzen.</p>
+      <p class="intro">Een handvol onderdelen dekt de vier activiteiten. Ze delen dezelfde lijnen, dezelfde mono, geel bij aanwijzen en blauw voor wat aan staat.</p>
     </div>
     <div class="inhoud">
       <div>
@@ -540,7 +548,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
     </div>
     <div class="inhoud">
       <div class="toon">
-        <div class="vb">
+        <div class="vb wel">
           <span class="meta">Wel</span>
           <p>Ik maak films over gebouwen en de mensen die erin leven. Daarnaast schrijf ik teksten voor architecten en leid ik gesprekken over de stad.</p>
         </div>
@@ -548,7 +556,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
           <span class="meta">Niet</span>
           <p>Passionate storyteller die op het snijvlak van architectuur en film impactvolle content creëert.</p>
         </div>
-        <div class="vb">
+        <div class="vb wel">
           <span class="meta">Wel</span>
           <p>Vijf jaar lang filmde ik één sociaal woonblok. Dit is wat ik zag.</p>
         </div>
@@ -576,7 +584,8 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
   --grafiet:   #6A6965;
   --lijn:      #C9C7C0;
   --marker:    #FFE34A;  /* enkel als vlak */
-  --op-marker: #171716;  /* tekst op geel */
+  --hemel:     #99CCFF;  /* rustig vlak */
+  --op-marker: #171716;  /* tekst op geel en blauw */
   --tally:     #D2361F;
 
   --display: "neue-haas-grotesk-display", "Helvetica Neue", Helvetica, "Inter Tight", Arial, sans-serif;
