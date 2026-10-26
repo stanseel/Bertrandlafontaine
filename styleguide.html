@@ -11,17 +11,17 @@
 /* Layout: een rustig 12-koloms raster met een kader in vier hoeken (zoals een zoeker),
    grote, strak gezette koppen die ademen in plaats van roepen, metadata in mono als een filmslate. */
 :root {
-  --beton: #E8E7E2;      /* achtergrond: koel, licht beton */
-  --kalk: #F4F3EF;       /* vlakken iets lichter dan de grond */
+  --beton: #F7F8F7;      /* achtergrond: bijna wit, fris, met een koele zweem */
+  --kalk: #FFFFFF;       /* vlakken: puur wit */
   --inkt: #171716;       /* tekst en lijnen */
   --grafiet: #6A6965;    /* secundaire tekst, metadata */
-  --lijn: #C9C7C0;       /* fijne scheidingslijnen */
+  --lijn: #DCDEDC;       /* fijne scheidingslijnen */
   --marker: #FFE34A;     /* accent 1: markeerstiftgeel, kort en scherp, altijd als vlak */
   --hemel: #99CCFF;      /* accent 2: lichtblauw, rustige vlakken */
   --op-marker: #171716;  /* tekst op geel of blauw, in beide thema's */
   --tally: #D2361F;      /* enkel als "live/opname"-signaal */
-  --still-a: #B9B6AC;
-  --still-b: #8E8B82;
+  --still-a: #D5D8D6;
+  --still-b: #AEB2B0;
 
   /* Neue Haas Grotesk (Adobe Fonts / Monotype) eerst; Helvetica Neue op Mac; Inter Tight als gratis webvervanger */
   --display: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, "Inter Tight", Arial, sans-serif;
@@ -316,13 +316,13 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
     <div class="deel-kop">
       <span class="meta">Kleur</span>
       <h2>Beton, inkt, een streep geel en een stuk lucht</h2>
-      <p class="intro">Het palet komt uit het architectenbureau: de grijze grond van een maquette, zwarte inkt, de gele markeerstift waarmee je op een plan aanduidt wat telt, en het lichtblauw van de lucht boven een gebouw. De beelden brengen de kleur, de site zelf blijft ingetogen.</p>
+      <p class="intro">Het palet komt uit het architectenbureau: het witte karton van een maquette, zwarte inkt, de gele markeerstift waarmee je op een plan aanduidt wat telt, en het lichtblauw van de lucht boven een gebouw. De beelden brengen de kleur, de site zelf blijft ingetogen.</p>
     </div>
     <div class="inhoud">
       <div>
         <div class="stalen">
-          <div class="staal"><div class="vlak" style="background:var(--beton)"></div><h3>Beton</h3><p>De achtergrond van elke pagina. Koel en licht, nooit puur wit.</p></div>
-          <div class="staal"><div class="vlak" style="background:var(--kalk)"></div><h3>Kalk</h3><p>Vlakken die iets naar voren komen, zoals een citaat of codeblok.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--beton)"></div><h3>Beton</h3><p>De achtergrond van elke pagina. Bijna wit, met een koele zweem. Fris en licht.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--kalk)"></div><h3>Kalk</h3><p>Puur wit. Voor vlakken die iets naar voren komen, zoals een voorbeeld of codeblok.</p></div>
           <div class="staal"><div class="vlak" style="background:var(--inkt)"></div><h3>Inkt</h3><p>Tekst, lijnen en kaders. Bijna zwart, met een warme ondertoon.</p></div>
           <div class="staal"><div class="vlak" style="background:var(--grafiet)"></div><h3>Grafiet</h3><p>Bijschriften, metadata en alles wat ondersteunt.</p></div>
           <div class="staal"><div class="vlak" style="background:var(--marker)"></div><h3>Marker</h3><p>Het scherpe accent. Voor wat je aanwijst en wat nu speelt. Altijd klein.</p></div>
@@ -348,11 +348,11 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
             <table>
               <thead><tr><th>Naam</th><th>Licht</th><th>Donker</th><th>Gebruik</th></tr></thead>
               <tbody>
-                <tr><td>Beton</td><td><span class="swatch-mini" style="background:#E8E7E2"></span><code>#E8E7E2</code></td><td><span class="swatch-mini" style="background:#141413"></span><code>#141413</code></td><td>Achtergrond</td></tr>
-                <tr><td>Kalk</td><td><span class="swatch-mini" style="background:#F4F3EF"></span><code>#F4F3EF</code></td><td><span class="swatch-mini" style="background:#1C1C1A"></span><code>#1C1C1A</code></td><td>Vlakken</td></tr>
+                <tr><td>Beton</td><td><span class="swatch-mini" style="background:#F7F8F7"></span><code>#F7F8F7</code></td><td><span class="swatch-mini" style="background:#141413"></span><code>#141413</code></td><td>Achtergrond</td></tr>
+                <tr><td>Kalk</td><td><span class="swatch-mini" style="background:#FFFFFF"></span><code>#FFFFFF</code></td><td><span class="swatch-mini" style="background:#1C1C1A"></span><code>#1C1C1A</code></td><td>Vlakken</td></tr>
                 <tr><td>Inkt</td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td><span class="swatch-mini" style="background:#ECEAE4"></span><code>#ECEAE4</code></td><td>Tekst, lijnen</td></tr>
                 <tr><td>Grafiet</td><td><span class="swatch-mini" style="background:#6A6965"></span><code>#6A6965</code></td><td><span class="swatch-mini" style="background:#9B998F"></span><code>#9B998F</code></td><td>Metadata</td></tr>
-                <tr><td>Lijn</td><td><span class="swatch-mini" style="background:#C9C7C0"></span><code>#C9C7C0</code></td><td><span class="swatch-mini" style="background:#34332F"></span><code>#34332F</code></td><td>Fijne scheiding</td></tr>
+                <tr><td>Lijn</td><td><span class="swatch-mini" style="background:#DCDEDC"></span><code>#DCDEDC</code></td><td><span class="swatch-mini" style="background:#34332F"></span><code>#34332F</code></td><td>Fijne scheiding</td></tr>
                 <tr><td>Marker</td><td><span class="swatch-mini" style="background:#FFE34A"></span><code>#FFE34A</code></td><td><span class="swatch-mini" style="background:#FFE34A"></span><code>#FFE34A</code></td><td>Accent, enkel als vlak</td></tr>
                 <tr><td>Hemel</td><td><span class="swatch-mini" style="background:#99CCFF"></span><code>#99CCFF</code></td><td><span class="swatch-mini" style="background:#99CCFF"></span><code>#99CCFF</code></td><td>Rustig vlak, citaat, actief filter</td></tr>
                 <tr><td>Tekst op geel en blauw</td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td>Altijd donker</td></tr>
@@ -578,11 +578,11 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
     <div class="inhoud">
       <div>
 <pre>:root {
-  --beton:     #E8E7E2;
-  --kalk:      #F4F3EF;
+  --beton:     #F7F8F7;
+  --kalk:      #FFFFFF;
   --inkt:      #171716;
   --grafiet:   #6A6965;
-  --lijn:      #C9C7C0;
+  --lijn:      #DCDEDC;
   --marker:    #FFE34A;  /* enkel als vlak */
   --hemel:     #99CCFF;  /* rustig vlak */
   --op-marker: #171716;  /* tekst op geel en blauw */
