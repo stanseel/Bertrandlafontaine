@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stijlgids Regie &amp; Woord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: een rustig 12-koloms raster met een kader in vier hoeken (zoals een zoeker),
+   grote smalle koppen die ademen in plaats van roepen, metadata in mono als een filmslate. */
+:root {
+  --beton: #E8E7E2;      /* achtergrond: koel, licht beton */
+  --kalk: #F4F3EF;       /* vlakken iets lichter dan de grond */
+  --inkt: #171716;       /* tekst en lijnen */
+  --grafiet: #6A6965;    /* secundaire tekst, metadata */
+  --lijn: #C9C7C0;       /* fijne scheidingslijnen */
+  --marker: #FFE34A;     /* het ene accent: markeerstiftgeel, altijd als vlak */
+  --op-marker: #171716;  /* tekst op geel, in beide thema's */
+  --tally: #D2361F;      /* enkel als "live/opname"-signaal */
+  --still-a: #B9B6AC;
+  --still-b: #8E8B82;
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --tekst: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  --rand: clamp(16px, 3vw, 40px);
+  --kolom: 12;
+  --tussen: clamp(12px, 1.6vw, 24px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --beton: #141413; --kalk: #1C1C1A; --inkt: #ECEAE4; --grafiet: #9B998F; --lijn: #34332F;
+    --tally: #F0543B; --still-a: #3A3935; --still-b: #2A2926;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --beton: #141413; --kalk: #1C1C1A; --inkt: #ECEAE4; --grafiet: #9B998F; --lijn: #34332F;
+  --tally: #F0543B; --still-a: #3A3935; --still-b: #2A2926;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--beton); color: var(--inkt);
+  font-family: var(--tekst); font-size: 17px; line-height: 1.55;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+::selection { background: var(--marker); color: var(--op-marker); }
+:focus-visible { outline: 2px solid var(--inkt); outline-offset: 3px; box-shadow: 0 0 0 6px var(--marker); }
+.markeer, .hoeken nav a:hover, .tekstlink:hover, .project:hover h4 span { background: var(--marker); color: var(--op-marker); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+.wrap { padding-inline: var(--rand); padding-block: 0; max-width: 1440px; margin: 0 auto; }
+
+/* ---------- Mono labels ---------- */
+.meta { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--grafiet); font-variant-numeric: tabular-nums; }
+.meta b { font-weight: 500; color: var(--inkt); }
+
+/* ---------- Kop van de gids: vier hoeken ---------- */
+.hoeken {
+  position: relative; min-height: min(78vh, 720px);
+  display: grid; grid-template-rows: auto 1fr auto; gap: 24px;
+  padding-block: 20px 28px;
+}
+.hoeken .rij { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.hoeken nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.hoeken nav a { text-decoration: none; font-size: 15px; }
+.hoeken nav a { padding: 1px 3px; margin: -1px -3px; }
+.naam { font-weight: 500; font-size: 15px; }
+.hero { align-self: end; }
+.hero h1 {
+  font-family: var(--display); font-stretch: 68%; font-weight: 560;
+  font-size: clamp(56px, 13.5vw, 210px); line-height: .86; letter-spacing: -.02em;
+  margin: 0; text-wrap: balance;
+}
+.hero h1 em { font-style: italic; font-weight: 300; background: var(--marker); color: var(--op-marker); padding: 0 .06em; }
+.hero p { max-width: 44ch; margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 21px); color: var(--grafiet); }
+
+/* ---------- Ticker ---------- */
+.ticker { background: var(--marker); color: var(--op-marker); overflow: hidden; white-space: nowrap; padding-block: 9px; }
+.ticker .band { display: inline-flex; gap: 48px; animation: schuif 60s linear infinite; padding-left: 48px; }
+.ticker span { font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.ticker .rec::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--tally); margin-right: 10px; vertical-align: 1px; }
+@keyframes schuif { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker .band { animation: none; } }
+
+/* ---------- Secties ---------- */
+section.deel { padding-block: clamp(56px, 9vw, 120px); border-bottom: 1px solid var(--lijn); }
+.deel-kop { display: grid; grid-template-columns: repeat(var(--kolom), minmax(0,1fr)); gap: var(--tussen); margin-bottom: clamp(32px, 5vw, 64px); }
+.deel-kop .meta { grid-column: 1 / span 3; padding-top: .7em; }
+.deel-kop h2 {
+  grid-column: 4 / span 9; margin: 0;
+  font-family: var(--display); font-stretch: 72%; font-weight: 540;
+  font-size: clamp(38px, 6vw, 84px); line-height: .95; letter-spacing: -.015em; text-wrap: balance;
+}
+.deel-kop .intro { grid-column: 4 / span 6; margin: 18px 0 0; color: var(--grafiet); max-width: 60ch; }
+.inhoud { display: grid; grid-template-columns: repeat(var(--kolom), minmax(0,1fr)); gap: var(--tussen); }
+.inhoud > * { grid-column: 4 / span 9; min-width: 0; }
+@media (max-width: 820px) {
+  .deel-kop .meta, .deel-kop h2, .deel-kop .intro, .inhoud > * { grid-column: 1 / -1; }
+}
+h3 { font-family: var(--display); font-stretch: 85%; font-weight: 600; font-size: 22px; line-height: 1.2; margin: 0 0 10px; }
+p { margin: 0 0 1em; max-width: 64ch; }
+
+/* ---------- Richting: drie kolommen ---------- */
+.drie { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--tussen); }
+@media (max-width: 820px) { .drie { grid-template-columns: 1fr; } }
+.kolom { border-top: 1px solid var(--inkt); padding-top: 14px; }
+.kolom.midden { border-top: 3px solid var(--inkt); }
+.kolom.midden h3 span { background: var(--marker); color: var(--op-marker); padding: 0 4px; }
+.kolom ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+.kolom li { padding-left: 18px; position: relative; font-size: 15.5px; }
+.kolom li::before { position: absolute; left: 0; font-family: var(--mono); color: var(--grafiet); }
+.kolom li.plus::before { content: "+"; }
+.kolom li.min::before { content: "–"; }
+.kolom li.ok::before { content: "→"; color: var(--inkt); }
+
+/* ---------- Kleur ---------- */
+.stalen { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--tussen); }
+.staal { display: grid; gap: 10px; }
+.staal .vlak { aspect-ratio: 4 / 5; border: 1px solid var(--lijn); max-width: 100%; }
+.staal h3 { font-size: 18px; margin: 0; }
+.staal p { font-size: 14px; color: var(--grafiet); margin: 0; }
+.verhouding { display: flex; height: 18px; margin-top: 28px; border: 1px solid var(--lijn); }
+.verhouding div { height: 100%; }
+
+/* ---------- Typografie ---------- */
+.specimen { border-top: 1px solid var(--inkt); padding-block: 18px 30px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,2.4fr); gap: var(--tussen); }
+@media (max-width: 820px) { .specimen { grid-template-columns: 1fr; } }
+.specimen .groot { font-family: var(--display); font-stretch: 68%; font-weight: 560; font-size: clamp(54px, 9vw, 128px); line-height: .88; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.specimen .middel { font-family: var(--display); font-stretch: 85%; font-weight: 600; font-size: clamp(26px, 3vw, 36px); line-height: 1.1; }
+.specimen .lees { font-size: 19px; line-height: 1.6; max-width: 58ch; }
+.specimen .mono-demo { font-family: var(--mono); font-size: 14px; letter-spacing: .02em; line-height: 1.9; }
+
+/* ---------- Beeld ---------- */
+.still { position: relative; background:
+  linear-gradient(180deg, transparent 58%, var(--still-b) 58% 61%, transparent 61%),
+  linear-gradient(90deg, var(--still-a) 0 37%, var(--still-b) 37% 39%, var(--still-a) 39% 100%);
+  max-width: 100%;
+}
+.still.v2 { background:
+  linear-gradient(115deg, var(--still-b) 0 30%, var(--still-a) 30% 100%); }
+.still.v3 { background:
+  repeating-linear-gradient(90deg, var(--still-a) 0 22px, var(--still-b) 22px 24px); }
+.kader { position: relative; padding: 10px; }
+.kader::before, .kader::after, .kader > .h3k::before, .kader > .h3k::after {
+  content: ""; position: absolute; width: 16px; height: 16px; border-color: var(--inkt); border-style: solid; border-width: 0;
+}
+.kader::before { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.kader::after { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.kader > .h3k::before { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.kader > .h3k::after { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.formaten { display: grid; grid-template-columns: 2.39fr 1.78fr .8fr; gap: var(--tussen); align-items: end; }
+@media (max-width: 820px) { .formaten { grid-template-columns: 1fr; } }
+.formaten figure { margin: 0; min-width: 0; }
+.formaten figcaption { margin-top: 10px; }
+
+/* ---------- Componenten ---------- */
+.comp { border-top: 1px solid var(--inkt); padding-top: 14px; margin-bottom: 56px; }
+.comp > .meta { display: block; margin-bottom: 20px; }
+
+.project { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(0,1fr); gap: var(--tussen); align-items: end; text-decoration: none; }
+@media (max-width: 820px) { .project { grid-template-columns: 1fr; } }
+.project .still { aspect-ratio: 2.39 / 1; transition: filter .5s ease; filter: saturate(.7); }
+.project:hover .still { filter: saturate(1); }
+.project h4 { font-family: var(--display); font-stretch: 72%; font-weight: 560; font-size: clamp(34px, 4.4vw, 60px); line-height: .95; letter-spacing: -.015em; margin: 8px 0 14px; text-wrap: balance; }
+
+.slate { display: grid; grid-template-columns: auto 1fr; gap: 4px 18px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--grafiet); }
+.slate dt { color: var(--grafiet); }
+.slate dd { margin: 0; color: var(--inkt); }
+
+.labels { display: flex; gap: 8px; flex-wrap: wrap; }
+.label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding: 5px 10px 4px; border: 1px solid var(--inkt); border-radius: 999px; }
+.label.actief { background: var(--inkt); color: var(--beton); }
+.label.live { border-color: var(--tally); color: var(--tally); }
+.label.live::before { content: "● "; }
+
+.knoppen { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.knop { font-family: var(--tekst); font-size: 15px; font-weight: 500; padding: 12px 20px; border: 1px solid var(--inkt); background: transparent; color: var(--inkt); cursor: pointer; text-decoration: none; }
+.knop.vol { background: var(--inkt); color: var(--beton); }
+.knop:hover { background: var(--marker); border-color: var(--marker); color: var(--op-marker); }
+.tekstlink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; padding: 2px 3px; margin: -2px -3px; }
+.pijl::after { content: " ↗"; font-family: var(--mono); }
+
+.citaat { margin: 0; }
+.citaat blockquote { margin: 0; font-family: var(--display); font-stretch: 85%; font-weight: 300; font-style: italic; font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12; letter-spacing: -.01em; text-wrap: balance; max-width: 26ch; }
+.citaat figcaption { margin-top: 18px; }
+
+.lijst { list-style: none; padding: 0; margin: 0; }
+.lijst li { display: grid; grid-template-columns: 70px minmax(0,1fr) auto; gap: 16px; align-items: baseline; padding-block: 14px; border-bottom: 1px solid var(--lijn); }
+.lijst li:first-child { border-top: 1px solid var(--lijn); }
+.lijst .t { font-size: 18px; font-weight: 500; }
+.lijst .t small { display: block; font-weight: 400; font-size: 14px; color: var(--grafiet); }
+.lijst li { padding-inline: 8px; margin-inline: -8px; transition: background .2s ease-out; }
+.lijst li:hover { background: var(--marker); }
+.lijst li:hover, .lijst li:hover .meta, .lijst li:hover small { color: var(--op-marker); }
+
+/* ---------- Tabellen (richtwaarden) ---------- */
+.tabel-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 520px; }
+th, td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--lijn); vertical-align: top; }
+th { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--grafiet); font-weight: 400; border-bottom-color: var(--inkt); }
+td code { font-family: var(--mono); font-size: 13px; }
+.swatch-mini { display: inline-block; width: 14px; height: 14px; border: 1px solid var(--lijn); vertical-align: -2px; margin-right: 8px; }
+
+.richtwaarde { margin-top: 36px; }
+.richtwaarde summary { cursor: pointer; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--grafiet); list-style: none; padding-block: 8px; }
+.richtwaarde summary::-webkit-details-marker { display: none; }
+.richtwaarde summary::before { content: "+ "; }
+.richtwaarde[open] summary::before { content: "– "; }
+.richtwaarde summary:hover { color: var(--inkt); }
+
+.toon { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--tussen); }
+@media (max-width: 820px) { .toon { grid-template-columns: 1fr; } }
+.toon .vb { background: var(--kalk); padding: 20px; border: 1px solid var(--lijn); }
+.toon .vb p { margin: 8px 0 0; font-size: 16px; }
+
+pre { background: var(--kalk); border: 1px solid var(--lijn); padding: 18px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.7; }
+
+footer { padding-block: 40px 56px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hoeken">
+    <div class="rij">
+      <span class="naam">Voornaam Achternaam</span>
+      <nav aria-label="Inhoud van de gids">
+        <a href="#richting">Richting</a>
+        <a href="#kleur">Kleur</a>
+        <a href="#type">Letter</a>
+        <a href="#beeld">Beeld</a>
+        <a href="#componenten">Onderdelen</a>
+        <a href="#toon">Toon</a>
+      </nav>
+    </div>
+    <div class="hero">
+      <h1>Ruimte<br>in beeld <em>&amp;</em><br>in woorden</h1>
+      <p>Stijlgids voor de site van een documentairemaker in de architectuur. Hij regisseert, schrijft, modereert en maakt podcasts.</p>
+    </div>
+    <div class="rij">
+      <span class="meta">Stijlgids <b>v0.1</b> · okt 2026</span>
+      <span class="meta">Regie · Tekst · Moderatie · Podcast</span>
+    </div>
+  </header>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="band">
+    <span class="rec">Nu in montage: werktitel documentaire</span><span>Panel · De stad na de auto · Antwerpen</span><span>Podcast afl. 14 · Over beton en geduld</span><span>Tekst voor een architectuurjaarboek</span>
+    <span class="rec">Nu in montage: werktitel documentaire</span><span>Panel · De stad na de auto · Antwerpen</span><span>Podcast afl. 14 · Over beton en geduld</span><span>Tekst voor een architectuurjaarboek</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- RICHTING -->
+  <section class="deel" id="richting">
+    <div class="deel-kop">
+      <span class="meta">Richting</span>
+      <h2>Tussen het affiche en het witte blad</h2>
+      <p class="intro">De ene referentie roept, de andere fluistert. Deze site spreekt op normale toon, zoals een goede documentaire: met zelfvertrouwen, en met ruimte om te kijken.</p>
+    </div>
+    <div class="inhoud">
+      <div class="drie">
+        <div class="kolom">
+          <h3>Simon Ostrovsky</h3>
+          <span class="meta">Te hard, te Amerikaans</span>
+          <ul>
+            <li class="plus">Grote smalle koppen met karakter</li>
+            <li class="plus">Een ticker die toont waar hij nu mee bezig is</li>
+            <li class="plus">Metadata per project: jaar, maand, soort werk</li>
+            <li class="min">Rood en navy over elkaar, alles in kapitalen</li>
+            <li class="min">Lagen die door elkaar schuiven en schreeuwen</li>
+          </ul>
+        </div>
+        <div class="kolom">
+          <h3>Jacob Hege</h3>
+          <span class="meta">Te kaal, te DIY</span>
+          <ul>
+            <li class="plus">Navigatie in de vier hoeken</li>
+            <li class="plus">Veel wit, het werk krijgt alle ruimte</li>
+            <li class="plus">Bestandsnamen als bijschrift, persoonlijk en direct</li>
+            <li class="min">Standaard systeemletter zonder hiërarchie</li>
+            <li class="min">Geen structuur, je moet zelf zoeken</li>
+          </ul>
+        </div>
+        <div class="kolom midden">
+          <h3><span>Het midden</span></h3>
+          <span class="meta">Europees, rustig, met een eigen stem</span>
+          <ul>
+            <li class="ok">Grote, smalle koppen in kleine letters, half zo luid</li>
+            <li class="ok">Vier hoeken, maar binnen een strak raster</li>
+            <li class="ok">Eén accentkleur: markeerstiftgeel, altijd als vlak</li>
+            <li class="ok">Metadata in mono, als op een filmslate</li>
+            <li class="ok">Een trage ticker voor wat er nu loopt</li>
+            <li class="ok">Beeld groot en breed, zoals in de cinema</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KLEUR -->
+  <section class="deel" id="kleur">
+    <div class="deel-kop">
+      <span class="meta">Kleur</span>
+      <h2>Beton, inkt en een streep geel</h2>
+      <p class="intro">Het palet komt uit het architectenbureau: de grijze grond van een maquette, zwarte inkt en de gele markeerstift waarmee je op een plan aanduidt wat telt. De beelden brengen de kleur, de site zelf blijft ingetogen.</p>
+    </div>
+    <div class="inhoud">
+      <div>
+        <div class="stalen">
+          <div class="staal"><div class="vlak" style="background:var(--beton)"></div><h3>Beton</h3><p>De achtergrond van elke pagina. Koel en licht, nooit puur wit.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--kalk)"></div><h3>Kalk</h3><p>Vlakken die iets naar voren komen, zoals een citaat of codeblok.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--inkt)"></div><h3>Inkt</h3><p>Tekst, lijnen en kaders. Bijna zwart, met een warme ondertoon.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--grafiet)"></div><h3>Grafiet</h3><p>Bijschriften, metadata en alles wat ondersteunt.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--marker)"></div><h3>Marker</h3><p>Het enige accent. Altijd als vlak achter donkere tekst, nooit als tekstkleur.</p></div>
+          <div class="staal"><div class="vlak" style="background:var(--tally)"></div><h3>Tally</h3><p>Het rode opnamelampje. Alleen voor wat nu live is of in productie zit.</p></div>
+        </div>
+        <div class="verhouding" aria-label="Verhouding in gebruik">
+          <div style="flex:70;background:var(--beton)"></div>
+          <div style="flex:20;background:var(--inkt)"></div>
+          <div style="flex:7;background:var(--grafiet)"></div>
+          <div style="flex:2.5;background:var(--marker)"></div>
+          <div style="flex:.5;background:var(--tally)"></div>
+        </div>
+        <p class="meta" style="margin-top:10px">Ruwe verhouding op een pagina: vooral beton, wat inkt, zelden geel, bijna nooit rood</p>
+        <p style="margin-top:28px">Er is ook een donkere versie. Daar wordt beton bijna zwart en inkt lichtgrijs, en het geel blijft gewoon hetzelfde. Op donker licht het zelfs nog beter op. Gebruik die bijvoorbeeld op een projectpagina waar de film centraal staat, zoals de lichten in een zaal die doven.</p>
+        <p>Geel op een lichte grond is niet leesbaar als tekst. Gebruik het daarom zoals een markeerstift: als vlak achter donkere tekst. Denk aan de ticker, een knop of link onder de muis, een rij in een lijst of één woord in een kop. Geel valt hard op, dus spaarzaam gebruiken: één geel moment per scherm is genoeg.</p>
+
+        <details class="richtwaarde">
+          <summary>Richtwaarden kleur</summary>
+          <div class="tabel-wrap">
+            <table>
+              <thead><tr><th>Naam</th><th>Licht</th><th>Donker</th><th>Gebruik</th></tr></thead>
+              <tbody>
+                <tr><td>Beton</td><td><span class="swatch-mini" style="background:#E8E7E2"></span><code>#E8E7E2</code></td><td><span class="swatch-mini" style="background:#141413"></span><code>#141413</code></td><td>Achtergrond</td></tr>
+                <tr><td>Kalk</td><td><span class="swatch-mini" style="background:#F4F3EF"></span><code>#F4F3EF</code></td><td><span class="swatch-mini" style="background:#1C1C1A"></span><code>#1C1C1A</code></td><td>Vlakken</td></tr>
+                <tr><td>Inkt</td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td><span class="swatch-mini" style="background:#ECEAE4"></span><code>#ECEAE4</code></td><td>Tekst, lijnen</td></tr>
+                <tr><td>Grafiet</td><td><span class="swatch-mini" style="background:#6A6965"></span><code>#6A6965</code></td><td><span class="swatch-mini" style="background:#9B998F"></span><code>#9B998F</code></td><td>Metadata</td></tr>
+                <tr><td>Lijn</td><td><span class="swatch-mini" style="background:#C9C7C0"></span><code>#C9C7C0</code></td><td><span class="swatch-mini" style="background:#34332F"></span><code>#34332F</code></td><td>Fijne scheiding</td></tr>
+                <tr><td>Marker</td><td><span class="swatch-mini" style="background:#FFE34A"></span><code>#FFE34A</code></td><td><span class="swatch-mini" style="background:#FFE34A"></span><code>#FFE34A</code></td><td>Accent, enkel als vlak</td></tr>
+                <tr><td>Tekst op marker</td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td><span class="swatch-mini" style="background:#171716"></span><code>#171716</code></td><td>Altijd donker</td></tr>
+                <tr><td>Tally</td><td><span class="swatch-mini" style="background:#D2361F"></span><code>#D2361F</code></td><td><span class="swatch-mini" style="background:#F0543B"></span><code>#F0543B</code></td><td>Live, in productie</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAFIE -->
+  <section class="deel" id="type">
+    <div class="deel-kop">
+      <span class="meta">Letter</span>
+      <h2>Eén familie, drie breedtes</h2>
+      <p class="intro">Archivo is een grotesk die je smal, normaal en breed kunt zetten. Zo komt het karakter van Simons smalle koppen terug zonder de schreeuw. IBM Plex Mono doet de rest: data, tijdcode, bijschriften.</p>
+    </div>
+    <div class="inhoud">
+      <div>
+        <div class="specimen">
+          <span class="meta">Grote kop<br><b>Archivo smal</b></span>
+          <div class="groot">De stille kracht van een muur</div>
+        </div>
+        <div class="specimen">
+          <span class="meta">Tussenkop<br><b>Archivo half-smal</b></span>
+          <div class="middel">Een film over wie er woont, niet over wie er bouwde</div>
+        </div>
+        <div class="specimen">
+          <span class="meta">Lopende tekst<br><b>Archivo normaal</b></span>
+          <div class="lees">Architectuur toont zich pas als er iemand door loopt. Daarom begint elke film bij de mensen die het gebouw dagelijks gebruiken: de conciërge, de buurvrouw, het kind dat de trap telt. Wat zij zien, zie je zelden op een foto.</div>
+        </div>
+        <div class="specimen">
+          <span class="meta">Metadata<br><b>IBM Plex Mono</b></span>
+          <div class="mono-demo">2026 · DOCUMENTAIRE · 52 MIN<br>TC 00:14:32:08<br>still_brutalisme_antwerpen_03.jpg</div>
+        </div>
+        <h3 style="margin-top:28px">Zo gebruik je ze</h3>
+        <p>Koppen staan in gewone kleine letters, niet in kapitalen. Ze zijn groot en smal, met krappe regels, zodat ze als een blok lezen. Je mag één woord cursief zetten en geel markeren, zoals in de kop bovenaan, maar dat is een uitzondering.</p>
+        <p>Lopende tekst blijft rustig en goed leesbaar, met regels van hooguit een zestigtal tekens. Mono staat altijd in kleine kapitalen met wat extra ruimte tussen de letters. Je gebruikt het voor alles wat je in een productiedossier zou noteren: jaartal, duur, rol, opdrachtgever, locatie.</p>
+
+        <details class="richtwaarde">
+          <summary>Richtwaarden letter</summary>
+          <div class="tabel-wrap">
+            <table>
+              <thead><tr><th>Rol</th><th>Letter</th><th>Breedte · gewicht</th><th>Grootte (mobiel → desktop)</th><th>Regelafstand</th></tr></thead>
+              <tbody>
+                <tr><td>Hero</td><td>Archivo</td><td>68% · 560</td><td>56 → 210 px</td><td>0.86</td></tr>
+                <tr><td>Kop sectie</td><td>Archivo</td><td>72% · 540</td><td>38 → 84 px</td><td>0.95</td></tr>
+                <tr><td>Projecttitel</td><td>Archivo</td><td>72% · 560</td><td>34 → 60 px</td><td>0.95</td></tr>
+                <tr><td>Tussenkop</td><td>Archivo</td><td>85% · 600</td><td>22 → 36 px</td><td>1.1–1.2</td></tr>
+                <tr><td>Citaat</td><td>Archivo cursief</td><td>85% · 300</td><td>28 → 48 px</td><td>1.12</td></tr>
+                <tr><td>Tekst</td><td>Archivo</td><td>100% · 400</td><td>17 → 19 px</td><td>1.55–1.6</td></tr>
+                <tr><td>Meta</td><td>IBM Plex Mono</td><td>· 400/500, kapitalen</td><td>12–13 px</td><td>1.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEELD -->
+  <section class="deel" id="beeld">
+    <div class="deel-kop">
+      <span class="meta">Beeld</span>
+      <h2>Kijk door de zoeker</h2>
+      <p class="intro">Beelden zijn stills uit de films, geen promofoto's. Ze krijgen een fijn kader in de vier hoeken, zoals in de zoeker van een camera. Dat kader herhaalt de vier hoeken van de navigatie.</p>
+    </div>
+    <div class="inhoud">
+      <div>
+        <div class="formaten">
+          <figure>
+            <div class="kader"><span class="h3k"></span><div class="still" style="aspect-ratio:2.39/1"></div></div>
+            <figcaption class="meta">Breedbeeld · voor projecten en de hero</figcaption>
+          </figure>
+          <figure>
+            <div class="kader"><span class="h3k"></span><div class="still v2" style="aspect-ratio:16/9"></div></div>
+            <figcaption class="meta">16:9 · voor panels en podcasts</figcaption>
+          </figure>
+          <figure>
+            <div class="kader"><span class="h3k"></span><div class="still v3" style="aspect-ratio:4/5"></div></div>
+            <figcaption class="meta">Staand · voor portret en detail</figcaption>
+          </figure>
+        </div>
+        <h3 style="margin-top:36px">Zo gebruik je ze</h3>
+        <p>Toon beelden groot, liefst over de volle breedte van het raster. Zet nooit tekst over een beeld heen. Het bijschrift staat eronder in mono en mag gewoon de bestandsnaam of tijdcode zijn. Dat is een knipoog naar Jacob, maar dan verzorgd.</p>
+        <p>In ruststand zijn de beelden iets minder verzadigd. Wanneer je erover beweegt, komt de volle kleur terug. Zo blijft een overzichtspagina kalm en voelt elke film levend als je hem aanwijst.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTEN -->
+  <section class="deel" id="componenten">
+    <div class="deel-kop">
+      <span class="meta">Onderdelen · voorbeeldinhoud</span>
+      <h2>Bouwstenen voor elke pagina</h2>
+      <p class="intro">Een handvol onderdelen dekt de vier activiteiten. Ze delen dezelfde lijnen, dezelfde mono en dezelfde gele markering bij aanwijzen.</p>
+    </div>
+    <div class="inhoud">
+      <div>
+        <div class="comp">
+          <span class="meta">Project · documentaire</span>
+          <a class="project" href="#componenten">
+            <div class="kader"><span class="h3k"></span><div class="still"></div></div>
+            <div>
+              <span class="label live">In montage</span>
+              <h4><span>De laatste bewoners van de Kiel</span></h4>
+              <dl class="slate">
+                <dt>Jaar</dt><dd>2026</dd>
+                <dt>Duur</dt><dd>52 min</dd>
+                <dt>Rol</dt><dd>Regie, scenario</dd>
+                <dt>Met</dt><dd>Omroep, productiehuis</dd>
+              </dl>
+            </div>
+          </a>
+        </div>
+
+        <div class="comp">
+          <span class="meta">Labels · de vier activiteiten</span>
+          <div class="labels">
+            <span class="label actief">Alles</span>
+            <span class="label">Regie</span>
+            <span class="label">Tekst</span>
+            <span class="label">Moderatie</span>
+            <span class="label">Podcast</span>
+            <span class="label live">Live</span>
+          </div>
+          <p style="margin-top:14px;color:var(--grafiet);font-size:15px">Labels zijn ronde pillen met een dunne lijn. Het actieve filter is gevuld. Alleen wat nu loopt, krijgt rood.</p>
+        </div>
+
+        <div class="comp">
+          <span class="meta">Citaat · voor tekstwerk</span>
+          <figure class="citaat">
+            <blockquote>Een gebouw dat niets vraagt, krijgt ook niets terug.</blockquote>
+            <figcaption class="meta">Uit: tekst voor een tentoonstellingscatalogus, 2025</figcaption>
+          </figure>
+        </div>
+
+        <div class="comp">
+          <span class="meta">Lijst · podcasts en panels</span>
+          <ul class="lijst">
+            <li><span class="meta">Afl. 14</span><span class="t">Over beton en geduld<small>Met een ingenieur en een restaurateur</small></span><span class="meta">48:12</span></li>
+            <li><span class="meta">Afl. 13</span><span class="t">De straat als woonkamer<small>Met twee stadsontwerpers</small></span><span class="meta">55:40</span></li>
+            <li><span class="meta">Panel</span><span class="t">De stad na de auto<small>Antwerpen · 14 nov 2026</small></span><span class="label live">Binnenkort</span></li>
+          </ul>
+        </div>
+
+        <div class="comp">
+          <span class="meta">Knoppen en links</span>
+          <div class="knoppen">
+            <a class="knop vol" href="#componenten">Bekijk de trailer</a>
+            <a class="knop" href="#componenten">Alle projecten</a>
+            <a class="tekstlink pijl" href="#componenten">Luister op Spotify</a>
+          </div>
+          <p style="margin-top:14px;color:var(--grafiet);font-size:15px">Knoppen zijn hoekig, zonder schaduw. Bij aanwijzen worden ze geel. Links naar buiten krijgen een klein pijltje.</p>
+        </div>
+
+        <div class="comp">
+          <span class="meta">Navigatie</span>
+          <p>De navigatie staat in de vier hoeken van het scherm, net als bij Jacob. Linksboven de naam, rechtsboven de activiteiten. Linksonder de mail, rechtsonder Instagram en Vimeo. Op een telefoon schuift dat samen tot een balk bovenaan met een menu. De hoeken blijven staan als je scrolt. Zo voelt het scherm altijd als een kader.</p>
+        </div>
+
+        <div class="comp">
+          <span class="meta">Beweging</span>
+          <p>Beweging is traag en zacht, zoals een camera die rustig pant. De ticker loopt zo langzaam dat je hem kunt lezen. Beelden worden even scherper en voller van kleur als je ze aanwijst. Er zijn geen dingen die springen, stuiteren of uit het niets binnenvliegen. Wie in zijn systeem minder beweging vraagt, krijgt een stilstaande ticker.</p>
+          <details class="richtwaarde">
+            <summary>Richtwaarden beweging</summary>
+            <div class="tabel-wrap">
+              <table>
+                <thead><tr><th>Wat</th><th>Duur</th><th>Curve</th></tr></thead>
+                <tbody>
+                  <tr><td>Hover op beeld (kleur)</td><td>0,5 s</td><td><code>ease</code></td></tr>
+                  <tr><td>Hover op knop, link</td><td>0,2 s</td><td><code>ease-out</code></td></tr>
+                  <tr><td>Ticker, één volle ronde</td><td>± 60 s</td><td><code>linear</code></td></tr>
+                  <tr><td>Pagina-overgang (fade)</td><td>0,4 s</td><td><code>ease-in-out</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOON -->
+  <section class="deel" id="toon">
+    <div class="deel-kop">
+      <span class="meta">Toon</span>
+      <h2>Schrijf zoals hij praat op een panel</h2>
+      <p class="intro">Helder, nieuwsgierig en zonder jargon. Hij is zelf copywriter, dus de tekst mag gezien worden. Korte zinnen, concrete beelden, geen marketingtaal.</p>
+    </div>
+    <div class="inhoud">
+      <div class="toon">
+        <div class="vb">
+          <span class="meta">Wel</span>
+          <p>Ik maak films over gebouwen en de mensen die erin leven. Daarnaast schrijf ik teksten voor architecten en leid ik gesprekken over de stad.</p>
+        </div>
+        <div class="vb">
+          <span class="meta">Niet</span>
+          <p>Passionate storyteller die op het snijvlak van architectuur en film impactvolle content creëert.</p>
+        </div>
+        <div class="vb">
+          <span class="meta">Wel</span>
+          <p>Vijf jaar lang filmde ik één sociaal woonblok. Dit is wat ik zag.</p>
+        </div>
+        <div class="vb">
+          <span class="meta">Niet</span>
+          <p>EEN AANGRIJPENDE DOCUMENTAIRE DIE JE NOOIT MEER ZULT VERGETEN.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOKENS -->
+  <section class="deel" id="tokens">
+    <div class="deel-kop">
+      <span class="meta">Voor de bouw</span>
+      <h2>Variabelen om mee te starten</h2>
+      <p class="intro">Alles hierboven, samengevat als CSS. Dit is het vertrekpunt voor de site en mag nog bijgestuurd worden zodra de echte beelden en teksten er zijn.</p>
+    </div>
+    <div class="inhoud">
+      <div>
+<pre>:root {
+  --beton:     #E8E7E2;
+  --kalk:      #F4F3EF;
+  --inkt:      #171716;
+  --grafiet:   #6A6965;
+  --lijn:      #C9C7C0;
+  --marker:    #FFE34A;  /* enkel als vlak */
+  --op-marker: #171716;  /* tekst op geel */
+  --tally:     #D2361F;
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;  /* font-stretch 68–85% */
+  --tekst:   "Archivo", "Helvetica Neue", Arial, sans-serif;  /* font-stretch 100% */
+  --mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --rand:    clamp(16px, 3vw, 40px);   /* zijmarge */
+  --tussen:  clamp(12px, 1.6vw, 24px); /* ruimte tussen kolommen */
+  /* raster: 12 kolommen, max. 1440px breed; tekst start in kolom 4 */
+}</pre>
+        <p class="meta" style="margin-top:14px">Google Fonts: Archivo (variabel, breedte 62–125) + IBM Plex Mono 400/500</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span class="meta">Stijlgids v0.1 · okt 2026</span>
+    <span class="meta">Structuur en inhoud volgen</span>
+  </footer>
+</div>
+</body>
+</html>
